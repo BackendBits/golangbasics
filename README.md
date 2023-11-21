@@ -1,4 +1,4 @@
-# golangbasics - PART 1 (Basics Required to get started with Golang)
+# golangbasics - PART 1 (Getting started with Golang)
 
 
 # Table of Contents
