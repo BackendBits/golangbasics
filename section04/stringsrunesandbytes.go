@@ -36,13 +36,6 @@ func main() {
 	// =====================================================================================================
 	text := "Hello, 世界" // Hello, World in English and Sekai means world in Japanese
 
-	// Iterate over each rune in the string
-	fmt.Println("Runes in the String:")
-	for i, runeValue := range text {
-		// %U prints the Unicode format, %#U adds the "U+" prefix
-		fmt.Printf("%U starts at byte position %d\n", runeValue, i)
-	}
-
 	// Extracting a specific rune
 	firstRune, _ := utf8.DecodeRuneInString(text)
 	fmt.Println("\nFirst Rune in the String:", firstRune)
