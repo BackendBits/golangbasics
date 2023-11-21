@@ -25,6 +25,9 @@ type Engine interface {
 type ElectricEngine struct {
 	MilesPerKWH   uint8
 	KilowattHours uint8
+	OwnerInfo     struct {
+		Name string
+	}
 }
 
 // MilesLeft method for ElectricEngine
@@ -38,6 +41,21 @@ func canMakeIt(e Engine, miles uint8) bool {
 }
 
 func main() {
+
+	// SECTION 5: Structs and Interfaces in Golang
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("SECTION 5: Structs and Interfaces in Golang")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
+
+	// SECTION 5.1: GasEngine Example
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("GasEngine Example")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
+
 	// Creating a GasEngine instance
 	gasCar := GasEngine{
 		MilesPerGallon: 25,
@@ -51,23 +69,44 @@ func main() {
 
 	// Accessing struct fields
 	fmt.Println("Gas Car Miles per Gallon:", gasCar.MilesPerGallon)
+	fmt.Println("Gas Car Kilowatt Hours:", gasCar.Gallons)
 	fmt.Println("Gas Car Owner Name:", gasCar.OwnerInfo.Name)
 
 	// Using a struct method
 	fmt.Println("Gas Car Miles Left:", gasCar.MilesLeft())
 
+	// SECTION 5.2: ElectricEngine Example
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("ElectricEngine Example")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
+
 	// Creating an ElectricEngine instance
 	electricCar := ElectricEngine{
 		MilesPerKWH:   4,
 		KilowattHours: 20,
+		OwnerInfo: struct {
+			Name string
+		}{
+			Name: "Mark Doe",
+		},
 	}
 
 	// Accessing ElectricEngine struct fields
 	fmt.Println("Electric Car Miles per KWH:", electricCar.MilesPerKWH)
 	fmt.Println("Electric Car Kilowatt Hours:", electricCar.KilowattHours)
+	fmt.Println("Electric Car Owner Name:", electricCar.OwnerInfo.Name)
 
 	// Using an interface method
 	fmt.Println("Electric Car Miles Left:", electricCar.MilesLeft())
+
+	// SECTION 5.3: Interface Check Example
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("Interface Check Example")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
 
 	// Check if each car can make a certain distance
 	fmt.Println("Gas car can make it:", canMakeIt(gasCar, 200))

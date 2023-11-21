@@ -11,28 +11,29 @@ func printValues(values ...string) {
 	if values == nil {
 		fmt.Println("none")
 	}
+
+	// First is Index (In this case its given as '_') and Second is Value
 	for _, value := range values {
 		fmt.Println(value)
 	}
 }
 
 // Function with named return values
-func divideWithNamedResult(numerator, denominator int) (result int, err error) {
-	defer func() {
-		if r := recover(); r != nil {
-			err = errors.New("panic occurred")
-		}
-	}()
-
+func divide(numerator, denominator int) (result int, err error) {
 	if denominator == 0 {
-		panic("division by zero")
+		return 0, errors.New("division by zero")
 	}
-
-	result = numerator / denominator
-	return result, nil
+	return numerator / denominator, nil
 }
 
 func main() {
+
+	// SECTION 2: Functions and Control Structures in Golang
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("SECTION 2: Functions and Control Structures in Golang")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
 
 	fmt.Println()
 	fmt.Println("======================================================================================================")
@@ -63,14 +64,23 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("======================================================================================================")
-	fmt.Println("Function with Named Return Values and Defer")
+	fmt.Println("Function with Error Handling")
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 
-	// Function with Named Return Values and Defer
+	// Function with Named Return Values
 	numerator := 10
 	denominator := 2
-	result, err := divideWithNamedResult(numerator, denominator)
+	result, err := divide(numerator, denominator)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Printf("Result of %d / %d is: %d\n", numerator, denominator, result)
+	}
+
+	fmt.Println("Divide By Zero Case")
+	denominator = 0
+	result, err = divide(numerator, denominator)
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {

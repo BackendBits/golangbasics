@@ -6,7 +6,12 @@ import (
 )
 
 func main() {
-	// Arrays
+	// SECTION 2: Arrays, Slices, Maps and Loopsin Golang
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("SECTION 2: Arrays, Slices, Maps and Loopsin Golang")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
 
 	fmt.Println()
 	fmt.Println("======================================================================================================")
@@ -41,15 +46,15 @@ func main() {
 	slice1 = append(slice1, 4, 5, 6)
 
 	// Using make to create a slice
-	anotherSlice := make([]int, 3, 5)
+	slice3 := make([]int, 3, 5)
 
 	// Capacity of the slices
 	fmt.Println("Slice1:", slice1)
 	fmt.Println("Slice2:", slice2)
-	fmt.Println("Another Slice:", anotherSlice)
+	fmt.Println("Slice3:", slice3)
 	fmt.Println("Capacity of Slice1:", cap(slice1))
 	fmt.Println("Capacity of Slice2:", cap(slice2))
-	fmt.Println("Capacity of Another Slice:", cap(anotherSlice))
+	fmt.Println("Capacity of Slice3:", cap(slice3))
 
 	fmt.Println()
 	fmt.Println("======================================================================================================")
@@ -60,7 +65,7 @@ func main() {
 	// Declare and initialize an array with five integers
 	arr := [5]int{1, 2, 3, 4, 5}
 
-	// Create a slice from the array that includes elements from index 1 to 3 (exclusive)
+	// Create a slice from the array that includes elements from index 1 to 3  and 4th (exclusive)
 	// Syntax: arr[start:end]
 	// - start: Index from which the slice begins (inclusive)
 	// - end: Index where the slice ends (exclusive)
@@ -85,14 +90,20 @@ func main() {
 
 	// Difference between array and slice
 	ages := make(map[string]uint8)
-	ages["Male"] = 30
-	ages["Female"] = 28
+	ages["John"] = 30
+	ages["Mark"] = 28
 
+	// Iterating over the map
+	fmt.Println("Map:", ages)
+	for key, value := range ages {
+		fmt.Println(key, value)
+	}
+	fmt.Println()
 	// Accessing values in the map
 	_, unknownExists := ages["Unknown"]
 
 	// Deleting a value from the map
-	delete(ages, "Female")
+	delete(ages, "Mark")
 
 	// Iterating over the map
 	fmt.Println("Map:", ages)
@@ -100,15 +111,17 @@ func main() {
 		fmt.Println(key, value)
 	}
 
+	fmt.Println()
+
 	// Error handling with maps
 	if !unknownExists {
 		fmt.Println("Age for Unknown not found.")
 	}
 
-	// Error handling and printing age for Male and Female
-	maleAge, maleExists := ages["Male"]
-	if maleExists {
-		fmt.Printf("Age for Male is %d\n", maleAge)
+	// Error handling and printing age for Mark
+	markAge, markExists := ages["Mark"]
+	if markExists {
+		fmt.Printf("Age for Mark is %d\n", markAge)
 	}
 
 	// Loops
@@ -159,6 +172,10 @@ func main() {
 
 	fmt.Printf("Time without preallocation: %v seconds\n", timeWithoutPreallocation)
 	fmt.Printf("Time with preallocation: %v seconds\n", timeWithPreallocation)
+
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println()
 }
 
 // timeLoop measures the time taken to perform append operations in a loop.

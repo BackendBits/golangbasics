@@ -7,6 +7,7 @@ const (
 
 // Variables for the project
 var (
-	MaleAge   = 25
-	FemaleAge = 25
+	MarkAge  = 25
+	JohnAge  = 25
+	kevinAge = 30
 )
