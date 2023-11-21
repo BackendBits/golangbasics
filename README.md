@@ -1,6 +1,5 @@
 # golangbasics - PART 1 (Getting started with Golang)
 
-
 # Table of Contents
 
 - [Constants, Variables and Basic Data Types in Golang](section01/constantandvariableanddatatypes.go)
