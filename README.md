@@ -9,5 +9,5 @@
 - [Strings, Runes and Bytes](section04/stringsrunesandbytes.go)
 - [Structs and Interfaces](section05/structsandinterfaces.go)
 - [Pointers in Go](section06/pointers.go)
-- [Introduction to Generics](section07/generics.go)
+- [Generics in Go](section07/generics.go)
 - [Reading and Writing from a File in Go](section08/filesreadwrite.go)
