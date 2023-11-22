@@ -14,16 +14,30 @@ type Todo struct {
 	Content string `json:"content"`
 }
 
-const fileName = "todos.json"
+const fileName = "section08\\todos.json"
 
 // Function to write a Todo to a file
 func writeToFile(todo Todo, fileName string) error {
+	// Check if the file exists, create it if not
+	_, err := os.Stat(fileName)
+	if os.IsNotExist(err) {
+		file, err := os.Create(fileName)
+		if err != nil {
+			return err
+		}
+		defer file.Close()
+	} else if err != nil {
+		return err
+	}
+
+	// Open the file for writing
 	file, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return err
 	}
 	defer file.Close()
 
+	// Encode and write the Todo to the file
 	encoder := json.NewEncoder(file)
 	err = encoder.Encode(todo)
 	if err != nil {
@@ -37,12 +51,22 @@ func writeToFile(todo Todo, fileName string) error {
 func readFromFile(fileName string) ([]Todo, error) {
 	var todos []Todo
 
+	// Check if the file exists, return an empty list if not
+	_, err := os.Stat(fileName)
+	if os.IsNotExist(err) {
+		return todos, nil
+	} else if err != nil {
+		return nil, err
+	}
+
+	// Open the file for reading
 	file, err := os.Open(fileName)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
 
+	// Read each line from the file and decode into Todo
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		var todo Todo
@@ -97,13 +121,58 @@ func updateTodoInFile(updatedTodo Todo, fileName string) error {
 	return nil
 }
 
+// Function to delete a Todo from the file
+func deleteTodoFromFile(todoID int, fileName string) error {
+	// Read existing todos
+	existingTodos, err := readFromFile(fileName)
+	if err != nil {
+		return err
+	}
+
+	// Find and remove the todo with the specified ID
+	var found bool
+	var updatedTodos []Todo
+	for _, todo := range existingTodos {
+		if todo.ID == todoID {
+			found = true
+		} else {
+			updatedTodos = append(updatedTodos, todo)
+		}
+	}
+
+	// If todo not found, return an error
+	if !found {
+		return fmt.Errorf("Todo with ID %d not found", todoID)
+	}
+
+	// Write the updated todos back to the file
+	file, err := os.Create(fileName)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	for _, todo := range updatedTodos {
+		encoder := json.NewEncoder(file)
+		err := encoder.Encode(todo)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func main() {
 	for {
 		fmt.Println("Todo App Menu:")
 		fmt.Println("1. Add Todo")
 		fmt.Println("2. View Todos")
 		fmt.Println("3. Edit Todo")
-		fmt.Println("4. Exit")
+		fmt.Println("4. Delete Todo")
+		fmt.Println("5. Exit")
+		fmt.Println()
+		fmt.Println()
 
 		var choice int
 		fmt.Print("Enter your choice: ")
@@ -137,6 +206,8 @@ func main() {
 			todos, err := readFromFile(fileName)
 			if err != nil {
 				fmt.Println("Error reading Todos:", err)
+			} else if len(todos) == 0 {
+				fmt.Println("No Todos found.")
 			} else {
 				fmt.Println("Todos:")
 				for _, todo := range todos {
@@ -159,11 +230,20 @@ func main() {
 			} else {
 				fmt.Println("Todo edited successfully!")
 			}
-
 		case 4:
+			var todoID int
+			fmt.Print("Enter Todo ID to delete: ")
+			fmt.Scan(&todoID)
+
+			err := deleteTodoFromFile(todoID, fileName)
+			if err != nil {
+				fmt.Println("Error deleting Todo:", err)
+			} else {
+				fmt.Println("Todo deleted successfully!")
+			}
+		case 5:
 			fmt.Println("Exiting...")
 			os.Exit(0)
-
 		default:
 			fmt.Println("Invalid choice. Please enter a valid option.")
 		}
