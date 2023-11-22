@@ -68,7 +68,7 @@ func main() {
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 
-	// Function with Named Return Values
+	// Function with Error Handling
 	numerator := 10
 	denominator := 2
 	result, err := divide(numerator, denominator)
@@ -78,6 +78,7 @@ func main() {
 		fmt.Printf("Result of %d / %d is: %d\n", numerator, denominator, result)
 	}
 
+	// Function with Error Handling (Error Case)
 	fmt.Println("Divide By Zero Case")
 	denominator = 0
 	result, err = divide(numerator, denominator)

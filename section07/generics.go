@@ -13,7 +13,7 @@ func main() {
 	// SECTION 7: Generics in Golang
 	fmt.Println()
 	fmt.Println("======================================================================================================")
-	fmt.Println("SECTION 6: Generics in Golang")
+	fmt.Println("SECTION 7: Generics in Golang")
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 	// Create a slice of integers

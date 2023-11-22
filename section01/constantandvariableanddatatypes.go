@@ -46,13 +46,21 @@ func main() {
 	// Uncommenting the following line will cause a compilation error
 	// result := commonpackage.MarkAge + " years old"
 
+	// Both variable are public
 	fmt.Printf("Mark Age is public: %d\n", commonpackage.MarkAge)
 	fmt.Printf("John Age is public: %d\n", commonpackage.JohnAge)
 
-	// Issue is public or global variable should start with capital letter in the variable name
+	// Issue is public variable should start with capital letter in the variable name
+	// If its declared with first letter as lower case is package level variable, won't be accessible outside the file
+
 	// fmt.Printf("Kevin Age: %d\n", commonpackage.kevinAge)
 
 	fmt.Printf("Entry Age is Global: %d\n", entryAge)
+
+	// If its declared with first letter as lower case is package level function, won't be accessible outside the file
+	// fmt.Printf("Noel Age is local variable value with private function: %d\n", commonpackage.printLocalVariablePackageFunction())
+
+	fmt.Printf("Noel Age is local variable value with public function: %d\n", commonpackage.PrintLocalVariablePublicFunction())
 
 	fmt.Println()
 	fmt.Println("======================================================================================================")
@@ -61,21 +69,21 @@ func main() {
 	fmt.Println()
 
 	// Constants
-	fmt.Printf("Value of pi: %f\n", commonpackage.Pi)
+	fmt.Printf("Value of Constant Variable PI: %f\n", commonpackage.Pi)
+	fmt.Printf("Value of Constant Variable point: %d\n", commonpackage.Point)
 
 	// Uncommenting the line below will result in a compilation error
 	// commonpackage.Pi = 3.14159 // Error: cannot assign to pi (declared const)
 
 	// Variables
 	fmt.Printf("\nInitial Age: %d\n", commonpackage.MarkAge)
-	fmt.Printf("Initial Age: %d\n", commonpackage.MarkAge)
 
 	// Reassigning a new value to the variable
 	commonpackage.MarkAge = 30
 	fmt.Printf("Updated age: %d\n", commonpackage.MarkAge)
 
-	// Letters can be Unicode letters
-	var π = 22 / 7.0
+	// Letters can be Unicode letters as Golang uses UTF-8 encoding
+	var π = 22 / 7.0 // Using a unicode character π is allowed
 	fmt.Printf("π: %.2f\n", π)
 
 	fmt.Println()
@@ -84,7 +92,7 @@ func main() {
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 
-	// Basic Data Types
+	// Basic Data Types in Golang
 
 	var intValue int = 42
 	var int8Value int8 = 8
@@ -114,7 +122,7 @@ func main() {
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 
-	fmt.Println("\nData Types with Different Values:")
+	fmt.Println("\nnBasic Data Types in Golang with Different Values:")
 
 	fmt.Printf("Integer Values: %d, %d, %d, %d, %d\n", intValue, int8Value, int16Value, int32Value, int64Value)
 	fmt.Printf("Unsigned Integer Values: %d, %d, %d, %d, %d\n", uintValue, uint8Value, uint16Value, uint32Value, uint64Value)
@@ -127,7 +135,7 @@ func main() {
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 
-	fmt.Println("\nData Types:")
+	fmt.Println("\nAbout Size and Range of Basic Data Types in Golang:")
 
 	fmt.Println("int:", "Signed integer type with platform-dependent size, typically 32 or 64 bits, holding values in the range of -2^(n-1) to 2^(n-1)-1.")
 	fmt.Println("int8:", "Signed 8-bit integer type, ranging from -128 to 127.")

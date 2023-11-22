@@ -29,7 +29,9 @@ func main() {
 	byteCount := len(city)
 	fmt.Println("Number of Bytes:", byteCount)
 
-	fmt.Println("\n------------------------\n")
+	fmt.Println()
+	fmt.Println("------------------------")
+	fmt.Println()
 
 	// =====================================================================================================
 	// Example 2: Working with Runes in a String

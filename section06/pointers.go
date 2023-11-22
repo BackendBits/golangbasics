@@ -42,7 +42,7 @@ func main() {
 	// SECTION 6.1: Initial Inventory
 	fmt.Println()
 	fmt.Println("======================================================================================================")
-	fmt.Println("Initial Inventory")
+	fmt.Println("Initial Inventory Creation")
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 

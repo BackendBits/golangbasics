@@ -6,10 +6,10 @@ import (
 )
 
 func main() {
-	// SECTION 2: Arrays, Slices, Maps and Loopsin Golang
+	// SECTION 3: Arrays, Slices, Maps and Loopsin Golang
 	fmt.Println()
 	fmt.Println("======================================================================================================")
-	fmt.Println("SECTION 2: Arrays, Slices, Maps and Loopsin Golang")
+	fmt.Println("SECTION 3: Arrays, Slices, Maps and Loopsin Golang")
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 
@@ -124,8 +124,6 @@ func main() {
 		fmt.Printf("Age for Mark is %d\n", markAge)
 	}
 
-	// Loops
-
 	fmt.Println()
 	fmt.Println("======================================================================================================")
 	fmt.Println("Loops in Go")
@@ -156,7 +154,6 @@ func main() {
 	}
 
 	// Performance Test
-
 	fmt.Println()
 	fmt.Println("======================================================================================================")
 	fmt.Println("Performance Test with and without Preallocation on slice")

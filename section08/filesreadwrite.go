@@ -164,6 +164,13 @@ func deleteTodoFromFile(todoID int, fileName string) error {
 }
 
 func main() {
+
+	// SECTION 8: Reading and Writing from a File in Go
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("SECTION 8: Reading and Writing from a File in Go")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
 	for {
 		fmt.Println("Todo App Menu:")
 		fmt.Println("1. Add Todo")
