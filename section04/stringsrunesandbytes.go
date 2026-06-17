@@ -8,107 +8,82 @@ import (
 )
 
 func main() {
-	// SECTION 4: Strings, Runes and Bytes in Golang
 	fmt.Println()
 	fmt.Println("======================================================================================================")
-	fmt.Println("SECTION 4: Strings, Runes and Bytes in Golang")
+	fmt.Println("SECTION 4: Strings, Runes and Bytes in Go")
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 
-	// =====================================================================================================
-	// Example 1: Counting Runes in a String
-	// =====================================================================================================
 	city := "Kraków"
-	fmt.Println("Original String:", city)
+	fmt.Println("Original string:", city)
+	fmt.Println("Rune count:", utf8.RuneCountInString(city))
+	fmt.Println("Byte count:", len(city))
 
-	// utf8.RuneCountInString counts the number of runes (Unicode characters) in a string
-	runeCount := utf8.RuneCountInString(city)
-	fmt.Println("Number of Runes:", runeCount)
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("Bytes vs Runes")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
 
-	// len() counts the number of bytes in a string, not runes
-	byteCount := len(city)
-	fmt.Println("Number of Bytes:", byteCount)
+	text := "Hello, 世界"
+	firstRune, size := utf8.DecodeRuneInString(text)
+	fmt.Printf("First rune: %c, bytes used: %d\n", firstRune, size)
 
-	fmt.Println("\n------------------------\n")
+	// String indexes are byte indexes. text[:3] is safe here only because the
+	// first three characters are ASCII and each ASCII character is one byte.
+	fmt.Println("First 3 bytes:", text[:3])
 
-	// =====================================================================================================
-	// Example 2: Working with Runes in a String
-	// =====================================================================================================
-	text := "Hello, 世界" // Hello, World in English and Sekai means world in Japanese
+	// To slice by characters, convert to []rune first.
+	runes := []rune(text)
+	fmt.Println("First 3 runes:", string(runes[:3]))
+	fmt.Println("First 8 runes:", string(runes[:8]))
 
-	// Extracting a specific rune
-	firstRune, _ := utf8.DecodeRuneInString(text)
-	fmt.Println("\nFirst Rune in the String:", firstRune)
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("Iterating over Unicode Text")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
 
-	// Slicing a string by runes
-	slicedString := text[:3] // Take the first 3 runes
-	fmt.Println("\nSliced String by Runes:", slicedString)
-
-	// =====================================================================================================
-	// Example 3: Strings and UTF-8 Characters
-	// =====================================================================================================
-	myString := "Hello, 世界!" // Sekai means world
+	myString := "Hello, 世界!"
 	fmt.Println("String:", myString)
+	fmt.Printf("Byte at index 2: %v\n", myString[2])
 
-	// Indexing string reveals UTF-8 byte values
-	fmt.Printf("Index 2: %v\n", myString[2])
-
-	// Iterating over string using range decodes multi-byte characters
-	fmt.Println("Iterating over runes:")
 	for index, char := range myString {
-		// %U prints the Unicode format, %#U adds the "U+" prefix
-		fmt.Printf("Index: %d, Rune: %c, Unicode Point: %U\n", index, char, char)
+		fmt.Printf("Byte index: %d, Rune: %c, Unicode Point: %U\n", index, char, char)
 	}
 
-	// =====================================================================================================
-	// Example 4: Efficient String Building with strings.Builder
-	// =====================================================================================================
-	var strBuilder strings.Builder
+	fmt.Println()
+	fmt.Println("======================================================================================================")
+	fmt.Println("Efficient String and Byte Building")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
 
+	var strBuilder strings.Builder
 	strBuilder.WriteString("This is ")
 	strBuilder.WriteString("a concatenated ")
 	strBuilder.WriteString("string.")
+	fmt.Println("Result string using strings.Builder:", strBuilder.String())
 
-	resultString := strBuilder.String()
-	fmt.Println("Result String (using strings.Builder):", resultString)
-
-	// =====================================================================================================
-	// Example 5: Efficient Byte Buffer Building with bytes.Buffer
-	// =====================================================================================================
 	var byteBuffer bytes.Buffer
-
 	byteBuffer.WriteString("This is ")
 	byteBuffer.WriteString("a byte buffer ")
 	byteBuffer.WriteString("example.")
+	fmt.Println("Result bytes using bytes.Buffer:", byteBuffer.Bytes())
 
-	resultBytes := byteBuffer.Bytes()
-	fmt.Println("Result Bytes (using bytes.Buffer):", resultBytes)
-
-	// =====================================================================================================
-	// Example 6: Casting Strings to an Array of Runes
-	// =====================================================================================================
-	runesArray := []rune(myString)
-	fmt.Println("Array of Runes:", runesArray)
-
-	// =====================================================================================================
-	// Example 7: Creating Runes
-	// =====================================================================================================
-	rune1 := 'A'
-	fmt.Printf("\nRune 1: %c, Unicode Point: %U\n", rune1, rune1)
-
-	rune2 := '世'
-	fmt.Printf("Rune 2: %c, Unicode Point: %U\n", rune2, rune2)
-
-	// =====================================================================================================
-	// Additional Comments Section
-	// =====================================================================================================
 	fmt.Println()
 	fmt.Println("======================================================================================================")
-	fmt.Println("UTF-8 encoding uses a variable number of bytes for characters, making it efficient.")
-	fmt.Println("To work with characters directly, cast strings to an array of runes, which represents Unicode points.")
-	fmt.Println("String concatenation using the plus symbol creates new strings, but strings are immutable.")
-	fmt.Println("For efficient string building, use the strings package and the strings.Builder type.")
-	fmt.Println("strings.Builder appends values, and the final string is created only when the String() method is called.")
+	fmt.Println("Creating Runes")
+	fmt.Println("======================================================================================================")
+	fmt.Println()
+
+	rune1 := 'A'
+	rune2 := '世'
+	fmt.Printf("Rune 1: %c, Unicode Point: %U\n", rune1, rune1)
+	fmt.Printf("Rune 2: %c, Unicode Point: %U\n", rune2, rune2)
+
+	fmt.Println()
+	fmt.Println("Key point: len(string) counts bytes. range over a string decodes runes.")
+	fmt.Println("Convert to []rune when you need character-based slicing.")
 	fmt.Println("======================================================================================================")
 	fmt.Println()
 }
